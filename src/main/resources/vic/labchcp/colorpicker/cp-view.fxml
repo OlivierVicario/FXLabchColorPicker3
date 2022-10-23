@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vic.labchcp.colorpicker.CpController">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+            <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="180.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Slider fx:id="sliderL" blockIncrement="1.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Slider>
+            <Canvas fx:id="canvasL" height="20.0" width="400.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Slider fx:id="sliderA" blockIncrement="1.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Slider>
+            <Canvas fx:id="canvasB" height="20.0" width="400.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Slider fx:id="sliderB" blockIncrement="1.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Slider>
+            <Slider fx:id="sliderC" blockIncrement="1.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Slider>
+            <Slider fx:id="sliderH" blockIncrement="1.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Slider>
+            <Canvas fx:id="canvasA" height="20.0" width="400.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Canvas fx:id="canvasC" height="20.0" width="400.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Canvas fx:id="canvasH" height="20.0" width="400.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label text="L" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="A" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="B" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="C" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="H" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labL" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labA" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labB" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labC" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labH" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Rectangle fx:id="rectangleCurrentColor" fill="#bbbbbb" height="90.0" width="390.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin></Rectangle>
+            <Button fx:id="btnAddColor" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnAddCurrentColorActionHandler" text="Pick" GridPane.columnIndex="2" GridPane.rowIndex="12">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin></Button>
+            <MenuBar GridPane.columnSpan="4">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="miClose" mnemonicParsing="false" onAction="#miCloseActionHandler" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <VBox fx:id="vboxPalettes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="12">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></VBox>
+            <HBox fx:id="hboxColors" prefHeight="180.0" spacing="5.0" style="-fx-border-color: #bbb;" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </HBox>
+            <Button fx:id="btnSavePalette" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnSavePaletteActionHandler" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="13">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         
+      </GridPane>
