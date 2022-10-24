@@ -1,6 +1,5 @@
 package vic.labchcp.colorpicker;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,7 +12,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -30,8 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -106,39 +102,39 @@ public class CpController implements Initializable {
         sliderL.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                updateCPLayout();
+                updateColorPickerLayout();
             }
         });
         sliderA.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (sliderA.isFocused()) changeSlidersCH();
-                updateCPLayout();
+                updateColorPickerLayout();
             }
         });
         sliderB.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (sliderB.isFocused()) changeSlidersCH();
-                updateCPLayout();
+                updateColorPickerLayout();
             }
         });
         sliderC.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (sliderC.isFocused()) changeSlidersAB();
-                updateCPLayout();
+                updateColorPickerLayout();
             }
         });
         sliderH.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (sliderH.isFocused()) changeSlidersAB();
-                updateCPLayout();
+                updateColorPickerLayout();
             }
         });
 
-        updateCPLayout();
+        updateColorPickerLayout();
 
         palettes = new Palettes();
 
@@ -151,10 +147,14 @@ public class CpController implements Initializable {
 
     //********************************** ColorPicker ********************************************
     public void btnAddCurrentColorActionHandler(ActionEvent actionEvent) {
+        addColorToHboxColors((Color) rectangleCurrentColor.getFill());
+    }
+
+    public void addColorToHboxColors(Color c) {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         Label label = new Label();
-        Rectangle rectangle = new Rectangle(50, 50, rectangleCurrentColor.getFill());
+        Rectangle rectangle = new Rectangle(50, 50, c);
         rectangle.setStroke(Color.TRANSPARENT);
         rectangle.setStrokeWidth(10.0);
 
@@ -249,10 +249,10 @@ public class CpController implements Initializable {
         sliderB.setValue(colorState.B);
         sliderC.setValue(colorState.C);
         sliderH.setValue(colorState.H);
-        updateCPLayout();
+        updateColorPickerLayout();
     }
 
-    private void updateCPLayout() {
+    private void updateColorPickerLayout() {
         Color bgColor = Color.grayRgb(244);
         GraphicsContext gc = canvasL.getGraphicsContext2D();
         gc.setFill(bgColor);
@@ -373,19 +373,18 @@ public class CpController implements Initializable {
     //********************************** Palette **********************************************
     public void btnSavePaletteActionHandler(ActionEvent actionEvent) {
         Palette palette = new Palette(hboxColors);
-        //palettes.items.add(palette);
-        displayPalette(palette);
+        displayPaletteInVboxPalettes(palette);
     }
 
-    public void displayPalette(Palette palette) {
-        HBox hbox = new HBox();
-        hbox.setStyle("-fx-border-color: #bbb");
+    public void displayPaletteInVboxPalettes(Palette palette) {
+        HBox hboxPalette = new HBox();
+        hboxPalette.setStyle("-fx-border-color: #bbb");
 
         for (int i = 0; i < palette.rgbs.size(); i++) {
             Rectangle rectangle = new Rectangle(50, 50, RGB.rgbToFxcolor(palette.rgbs.get(i)));
             rectangle.setStroke(Color.TRANSPARENT);
             rectangle.setStrokeWidth(10.0);
-            hbox.getChildren().add(rectangle);
+            hboxPalette.getChildren().add(rectangle);
         }
 
         final ContextMenu cm = new ContextMenu();
@@ -400,7 +399,7 @@ public class CpController implements Initializable {
 
         MenuItem cmItem2 = new MenuItem("Delete");
         cmItem2.setOnAction((ActionEvent e) -> {
-            vboxPalettes.getChildren().remove(hbox);
+            vboxPalettes.getChildren().remove(hboxPalette);
         });
 
         MenuItem cmItem3 = new MenuItem("Update");
@@ -412,20 +411,27 @@ public class CpController implements Initializable {
         cm.getItems().add(cmItem2);
         cm.getItems().add(cmItem3);
 
-        hbox.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
+        hboxPalette.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
             if (e.getButton() == MouseButton.SECONDARY)
-                cm.show(hbox, e.getScreenX(), e.getScreenY());
-
+                cm.show(hboxPalette, e.getScreenX(), e.getScreenY());
+            if (e.getButton() == MouseButton.PRIMARY) {
+                hboxColors.getChildren().clear();
+                for (int i = 0; i < hboxPalette.getChildren().size(); i++) {
+                    Rectangle rectangle = (Rectangle) hboxPalette.getChildren().get(i);
+                    Color color = (Color) rectangle.getFill();
+                    addColorToHboxColors(color);
+                }
+            }
         });
 
-        vboxPalettes.getChildren().add(hbox);
+        vboxPalettes.getChildren().add(hboxPalette);
 
     }
 
     //********************************** Fichier **********************************************
 
     private void saveJSONFile() throws IOException {
-
+        palettes.items.clear();
         for (int i = 0; i < vboxPalettes.getChildren().size(); i++) {
             HBox hbox = (HBox) vboxPalettes.getChildren().get(i);
             Palette palette = new Palette();
@@ -437,17 +443,15 @@ public class CpController implements Initializable {
             palettes.items.add(palette);
         }
         ObjectMapper objectMapper = new ObjectMapper();
-
-        //String json = objectMapper.writeValueAsString(palettes);
-        //System.out.println(json);
-
         objectMapper.writeValue(new File("palettes.json"), palettes);
     }
 
     private void loadJSONFile() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         palettes = objectMapper.readValue(new File("palettes.json"), Palettes.class);
-        System.out.println(palettes);
+        for (Palette p : palettes.items) {
+            displayPaletteInVboxPalettes(p);
+        }
     }
 
     public void miCloseActionHandler(ActionEvent actionEvent) throws IOException {
