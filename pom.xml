@@ -6,7 +6,7 @@
 
     <groupId>vic.labchcp</groupId>
     <artifactId>FXLabchColorPicker</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <name>FXLabchColorPicker</name>
 
     <properties>
@@ -43,6 +43,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.4.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.panteleyev/jpackage-maven-plugin -->
+        <dependency>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>1.5.2</version>
+        </dependency>
 
     </dependencies>
 
@@ -68,9 +74,9 @@
                         <configuration>
                             <mainClass>vic.labchcp.fxlabchcolorpicker/vic.labchcp.colorpicker.CpApplication
                             </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <launcher>LabchCPLauncher</launcher>
+                            <jlinkZipName>LabchCPZip</jlinkZipName>
+                            <jlinkImageName>LabchCPImage</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
@@ -78,6 +84,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.5.2</version>
+
+                <configuration>
+                    <name>LabchColorPicker</name>
+                    <runtimeImage>target/LabchCPImage</runtimeImage>
+                    <destination>target/dist</destination>
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>win</id>
+                        <configuration>
+                            <!--<icon>icons/icon.ico</icon>-->
+                            <winMenu>true</winMenu>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
+
+<!-- mvn clean compile javafx:jlink jpackage:jpackage@win -->
+

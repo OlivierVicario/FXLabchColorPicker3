@@ -1,5 +1,6 @@
 package vic.labchcp.colorpicker;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -138,11 +139,11 @@ public class CpController implements Initializable {
 
         palettes = new Palettes();
 
-        try {
+       /* try {
             loadJSONFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     //********************************** ColorPicker ********************************************
@@ -456,5 +457,6 @@ public class CpController implements Initializable {
 
     public void miCloseActionHandler(ActionEvent actionEvent) throws IOException {
         saveJSONFile();
+        Platform.exit();
     }
 }
